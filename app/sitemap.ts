@@ -1,14 +1,15 @@
 import { MetadataRoute } from "next"
-import { client } from "@/sanity/lib/client"
+import { sanityFetch } from "@/sanity/lib/fetch"
 import { projectsQuery, pressQuery, awardsQuery } from "@/sanity/lib/queries"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 
   const [projects, press, awards] = await Promise.all([
-    client.fetch<{ slug?: { current: string } }[]>(projectsQuery),
-    client.fetch<{ slug?: { current: string } }[]>(pressQuery),
-    client.fetch<{ slug?: { current: string } }[]>(awardsQuery),
+     sanityFetch<{ slug?: { current: string } }[]>({ query: projectsQuery }).catch(() => []),
+     sanityFetch<{ slug?: { current: string } }[]>({ query: pressQuery }).catch(() => []),
+     sanityFetch<{ slug?: { current: string } }[]>({ query: awardsQuery }).catch(() => []),
+   
   ])
 
   const staticRoutes: MetadataRoute.Sitemap = [
