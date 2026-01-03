@@ -74,12 +74,14 @@ export default async function HomePage() {
       <ScrollParticles />
       {/* Hero Section - Optimized for Mobile */}
       <section
-        className="relative min-h-screen w-full  overflow-hidden
+        className="relative min-h-screen w-full overflow-hidden
              px-4 sm:px-6 md:px-10
-             pt-35 sm:pt-40
-             flex items-center bg-cover bg-top bg-[length:100%]"
-             style={{ backgroundImage: "url('/ayodhya.jpg')" }}
+             pt-36 sm:pt-40
+             flex items-center
+             bg-cover bg-top"
+        style={{ backgroundImage: `url(${heroImage})` }}
       >
+
         {/* Dark cinematic overlay */}
         <div className="absolute inset-0 bg-black/55" />
 
