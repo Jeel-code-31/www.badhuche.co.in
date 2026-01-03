@@ -10,6 +10,3 @@ export function urlFor(source: Image | null | undefined) {
   if (!builder || !source) return ""
   return builder.image(source)
 }
-
-
-

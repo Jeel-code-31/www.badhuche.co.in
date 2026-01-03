@@ -675,11 +675,11 @@
   color: #BFA27A; 
   background: linear-gradient(
     90deg,
-    #746e66 25%,
-    #a5a299 45%,
-    #9d9d9c 50%,
-    #868686 55%,
-    #1f1f1f 85%
+    #967b57 25%,
+    #b09b5d 45%,
+    #bc9a4a 50%,
+    #be7a2b 55%,
+    #e7a447 85%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
