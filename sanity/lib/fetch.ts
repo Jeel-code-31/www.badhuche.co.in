@@ -16,8 +16,8 @@ export async function sanityFetch<QueryResponse>({
   tags?: string[]
   preview?: boolean
 }): Promise<QueryResponse> {
-  const isDevelopment = process.env.NODE_ENV === "development"
-  const isPreview = preview || isDevelopment
+ const isDevelopment = process.env.NODE_ENV === "development"
+const isPreview = preview || isDevelopment
 
   const activeClient = isPreview ? previewClient : client
 
