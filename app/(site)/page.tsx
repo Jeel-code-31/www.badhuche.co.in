@@ -74,12 +74,12 @@ export default async function HomePage() {
       <ScrollParticles />
       {/* Hero Section - Optimized for Mobile */}
       <section
-         className="relative min-h-screen w-full overflow-hidden
-             px-4 sm:px-6 md:px-10
-             pt-36 sm:pt-40
-             flex items-center
-             bg-cover bg-top"
-         style={{ backgroundImage: `url(${heroImage})` }}
+        className="relative min-h-screen w-full overflow-hidden
+            px-4 sm:px-6 md:px-10
+            pt-36 sm:pt-40
+            flex items-center
+            bg-cover bg-top"
+        style={{ backgroundImage: `url(${heroImage})` }}
       >
 
         {/* Dark cinematic overlay */}
@@ -178,8 +178,7 @@ export default async function HomePage() {
             </div>
 
             {/* Asymmetric masonry grid - Mobile optimized */}
-            <div className="grid  grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 md:gap-x-6">
-
+            <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-12 gap-12 md:gap-5">
               {/* Row 1 */}
               {projects[0] && (
                 <div className="col-span-12 md:col-span-7">
