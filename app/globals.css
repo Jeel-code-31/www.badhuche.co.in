@@ -672,18 +672,16 @@
   -webkit-text-stroke: 3px rgba(0,0,0,0.25);  
 }
  .text-shimmar {
-  color: #BFA27A; 
+  color: #ff9b04; 
   background: linear-gradient(
     90deg,
-    #967b57 25%,
-    #b09b5d 45%,
-    #bc9a4a 50%,
-    #be7a2b 55%,
+    #060300 25%,
+    #000000 45%,
+    #78590e 50%,
+    #b16916 55%,
     #e7a447 85%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 22s ease-in-out infinite;
+  animation: shimmer 25s ease-in-out infinite;
 }

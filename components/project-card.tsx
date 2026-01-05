@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { motion, useMotionValue, useTransform } from "framer-motion"
 import { TextureOverlay } from "./texture-overlay"
 import { SplitText } from "./split-text"
 
@@ -17,12 +17,20 @@ export interface ProjectCardProps {
   revealDelay?: number
 }
 
-export function ProjectCard({ title, number, image, href, size, description, revealDelay = 0 }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const [cursor, setCursor] = useState({ x: "50%", y: "50%" })
+export function ProjectCard({
+  title,
+  number,
+  image,
+  href,
+  size,
+  description,
+  revealDelay = 0,
+}: ProjectCardProps) {
   const ref = useRef<HTMLAnchorElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
+  /* ---------------- Reveal on Scroll ---------------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -31,93 +39,97 @@ export function ProjectCard({ title, number, image, href, size, description, rev
           observer.disconnect()
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.2 }
     )
 
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
 
+  /* ---------------- Sizes ---------------- */
   const sizeClasses = {
-    large: "w-full aspect-[4/5]",
-    medium: "w-full aspect-square",
-    small: "w-full aspect-[3/4]",
+    large: "aspect-[4/5]",
+    medium: "aspect-square",
+    small: "aspect-[3/4]",
   }
 
-  const palette = ["rgba(194, 84, 45, 0.35)", "rgba(184, 150, 63, 0.35)", "rgba(139, 105, 20, 0.35)"]
-  const glowColor = palette[(Number.parseInt(number, 10) || 0) % palette.length]
-  const cursorX = Number.parseFloat(cursor.x)
-  const cursorY = Number.parseFloat(cursor.y)
-  const tiltX = ((cursorY - 50) / 50) * 8
-  const tiltY = ((cursorX - 50) / 50) * -8
+  /* ---------------- Glow Colors ---------------- */
+  const palette = [
+    "rgba(194,84,45,0.45)",
+    "rgba(184,150,63,0.45)",
+    "rgba(139,105,20,0.45)",
+  ]
+  const glowColor =
+    palette[(Number.parseInt(number, 10) || 0) % palette.length]
+
+  /* ---------------- Tilt Effect ---------------- */
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10])
+
+  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
 
   return (
     <Link
       ref={ref}
       href={href}
-      data-cursor="project"
-      data-magnetic
-      className={`relative block ${sizeClasses[size]} overflow-hidden group transition-transform duration-500`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={(event) => {
-        const rect = event.currentTarget.getBoundingClientRect()
-        const x = ((event.clientX - rect.left) / rect.width) * 100
-        const y = ((event.clientY - rect.top) / rect.height) * 100
-        setCursor({ x: `${x}%`, y: `${y}%` })
+      onMouseLeave={() => {
+        setIsHovered(false)
+        mouseX.set(0)
+        mouseY.set(0)
       }}
-      style={{
-        boxShadow: isHovered
-          ? `0 20px 45px rgba(26,24,21,0.18), 0 10px 20px rgba(26,24,21,0.12), 0 0 50px ${glowColor}`
-          : "0 10px 24px rgba(26,24,21,0.08)",
-        transform: isHovered ? `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)` : "none",
-      }}
+      onMouseMove={handleMouseMove}
+      className={`group relative block w-full ${sizeClasses[size]} overflow-visible`}
     >
-      {/* Image container with reveal animation */}
-      <div
-        className="relative w-full h-full transition-all duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)]"
-        style={{
-          clipPath: isVisible ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
-          transitionDelay: `${revealDelay}ms`,
-        }}
-      >
-        {/* Image with hover zoom */}
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={title}
-          fill
-          className={`object-cover transition-all duration-700 ease-out ${isHovered ? "scale-105 brightness-90" : "scale-100 brightness-100"
-            }`}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          loading="lazy"
-        />
-
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-[#1A1815]/90 via-[#1A1815]/20 to-transparent transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"
-            }`}
-        />
-        <TextureOverlay texture="stone" opacity={isHovered ? 0.18 : 0.08} blendMode="multiply" />
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? "opacity-70" : "opacity-0"}`}
-          style={{
-            background: `radial-gradient(circle at ${cursor.x} ${cursor.y}, ${glowColor}, transparent 60%)`,
-          }}
-        />
-      </div>
-
+      {/* ================= CARD ================= */}
       <motion.div
-        className="absolute top-4 left-4 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ delay: 0.3 + revealDelay / 1000 }}
+        style={{
+          rotateX,
+          rotateY,
+        }}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        className="relative h-full w-full overflow-hidden rounded-3xl bg-[#141210]"
       >
-        <motion.span
-          className="font-mono text-5xl md:text-6xl font-light block"
-          animate={{ y: isHovered ? -10 : 0, backgroundPosition: isHovered ? "100% 0%" : "0% 0%" }}
-          transition={{ duration: 0.4 }}
+        {/* ---------- Image ---------- */}
+        <div
+          className="absolute inset-0 transition-[clip-path] duration-[1200ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
           style={{
-            backgroundImage: "linear-gradient(135deg, #c2542d, #b8963f)",
-            backgroundSize: "200% 200%",
+            clipPath: isVisible
+              ? "inset(0% 0% 0% 0%)"
+              : "inset(100% 0% 0% 0%)",
+            transitionDelay: `${revealDelay}ms`,
+          }}
+        >
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className={`object-cover transition-all duration-700 ${isHovered ? "scale-110 brightness-110" : "scale-100"
+              }`}
+          />
+
+          <TextureOverlay
+            texture="stone"
+            opacity={isHovered ? 0.18 : 0.08}
+            blendMode="multiply"
+          />
+        </div>
+
+        {/* ---------- Big Number ---------- */}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isVisible ? 1 : 0 }}
+          transition={{ delay: 0.4 + revealDelay / 1000 }}
+          className="absolute top-6 left-6 font-mono text-7xl font-light select-none"
+          style={{
+            backgroundImage: "linear-gradient(135deg, #ffe02eff 0%, #c8a44fff 50%, #F6C1A1 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -125,34 +137,60 @@ export function ProjectCard({ title, number, image, href, size, description, rev
           {number}
         </motion.span>
       </motion.div>
-
+      {/* Arrow Icon */}
       <div
-        className={`absolute bottom-0 left-0 right-0 p-4 md:p-6 transition-all duration-300 ${isHovered || isVisible
-            ? "translate-y-0 opacity-100"
-            : "translate-y-2 opacity-0"
+        className={`absolute top-4 right-4 transition-all duration-500 ${isHovered
+            ? "translate-x-0 translate-y-0 opacity-100"
+            : "translate-x-2 -translate-y-2 opacity-0"
           }`}
       >
+        <svg
+          width="40"
+          height="70"
+          viewBox="0 0 20 20"
+          fill="none"
+          className="text-[#FAF7F2]"
+        >
+          <path
+            d="M5 15L15 5M15 5H7M15 5V13"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </div>
 
-        <span className="text-xs uppercase tracking-[0.1em] block mb-1 text-[#B8963F]">({number})</span>
+
+      {/* ================= POPUP CONTENT ================= */}
+      <motion.div
+        initial={{ y: 40, opacity: 0 }}
+        animate={
+          isHovered
+            ? { y: 0, opacity: 1 }
+            : { y: 40, opacity: 0 }
+        }
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="pointer-events-none absolute -bottom-24 left-2 right-2 rounded-3xl
+                   bg-black/40 backdrop-blur-xl p-5 shadow-2xl"
+      >
+        <span className="text-xl uppercase tracking-[0.2em] text-[#B8963F] block mb-3">
+          ({number})
+        </span>
+
         <SplitText
           as="h3"
           text={title}
           mode="hover-wave"
-          className="font-serif text-lg md:text-xl text-[#FAF7F2]"
-          stagger={0.015}
+          stagger={0.02}
+          className="font-serif text-3xl text-[#FAF7F2]"
         />
-        {description && <p className="text-[#E8E2D9] text-sm mt-2 line-clamp-2">{description}</p>}
-      </div>
 
-      {/* Arrow indicator */}
-      <div
-        className={`absolute top-4 right-4 transition-all duration-500 ${isHovered ? "translate-x-0 translate-y-0 opacity-100" : "translate-x-2 -translate-y-2 opacity-0"
-          }`}
-      >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-[#FAF7F2]">
-          <path d="M5 15L15 5M15 5H7M15 5V13" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-      </div>
+        {description && (
+          <p className="mt-3 text-sm text-[#E5DED4] leading-relaxed">
+            {description}
+          </p>
+        )}
+      </motion.div>
     </Link>
+
   )
 }

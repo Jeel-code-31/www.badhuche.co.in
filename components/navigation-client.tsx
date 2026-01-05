@@ -66,7 +66,7 @@ export function NavigationClient({ settings, contactInfo }: NavigationClientProp
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${isScrolled
           ? "py-2 bg-[#FAF7F2]/100 backdrop-blur-md"
-          : "py-2 bg-white/50 backdrop-blur-sm"
+          : "py-2 bg-white/80 backdrop-blur-sm"
           }`}
       >
 

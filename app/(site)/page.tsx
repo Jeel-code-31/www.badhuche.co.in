@@ -21,10 +21,10 @@ import type { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Badhuc Art Studio - Iconic Cultural Sculptures & Public Art',
+  title: 'Badhuche Art Studio - Iconic Cultural Sculptures & Public Art',
   description: 'Award-winning sculpture studio creating monumental public artworks, cultural landmarks, and commissioned sculptures across India.',
   openGraph: {
-    title: 'Badhuc Art Studio',
+    title: 'Badhuche Art Studio',
     description: 'Creating iconic cultural landmarks through sculpture',
     type: 'website',
   },
@@ -93,15 +93,22 @@ export default async function HomePage() {
         />
 
         {/* Content Layer */}
-        <div className="h-24 sm:h-36 lg:h-44" />
+        <div className="h-24 sm:h-36 lg:h-44 mt-30" />
         <div className="relative z-5 max-w-[1500px] mx-auto w-full">
           <div className="max-w-[1000px]">
 
             {/* Heading text of hero section */}
-            <div className="oh-semibold text-sm sm:text-base md:text-4xl max-w-[1200px] mt-10 sm:mt-35 mb-5 sm:mb-5 leading-relaxed">
+            <div className="mt-20 sm:mt-20 md:mt-36 lg:mt-44">
+              <TextReveal delay={80}>
+                <span className="text-shimmar stroke-text text-4xl md:text-5xl lg:text-6xl">
+                  SHAPING'S ICONIC <br /> CULTURAL LANDMARKS
+                </span>
+              </TextReveal>
+           
+            <div className="oh-semibold text-sm sm:text-base md:text-4xl max-w-[1200px] mb-5 sm:mb-5 leading-relaxed">
               <p className="oh-semibold text-4xl md:text-5xl leading-relaxed">
                 <MagneticText
-                  className="mt-20 text-base sm:text-lg text-white/80"
+                  className="mt-2 text-base sm:text-lg text-white/100 max-w-lg block"
                   activeColor="#da951e"
                 >
                   {heroSubtitle}
@@ -109,15 +116,7 @@ export default async function HomePage() {
 
               </p>
             </div>
-
-
-            {/* Subtitle */}
-            <TextReveal delay={80}>
-              <span className="text-shimmar stroke-text mt-20 sm:mt-10 text-4xl md:text-5xl lg:text-6xl">
-                SHAPING'S ICONIC <br /> CULTURAL LANDMARKS
-              </span>
-
-            </TextReveal>
+            </div>
 
             {/* Scroll Indicator */}
             <TextReveal delay={300}>
@@ -164,7 +163,7 @@ export default async function HomePage() {
         <section className="px-6 md:px-10 py-20">
           <div className="max-w-[1400px] mx-auto">
             {/* Section header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-12 mb-12 sm:mb-16">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-12 sm:gap-12 mb-12 sm:mb-16">
               <TextReveal>
                 <MagneticText className="oh-label text-sm sm:text-base" activeColor="#c2542d">
                   (Selected Works)
@@ -178,40 +177,53 @@ export default async function HomePage() {
             </div>
 
             {/* Asymmetric masonry grid - Mobile optimized */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-12 gap-12 md:gap-5">
+            <div
+              className="
+    grid
+    grid-cols-1
+    sm:grid-cols-12
+    md:grid-cols-12
+    gap-x-6
+    gap-y-20
+    sm:gap-y-24
+    md:gap-x-6
+    md:gap-y-28
+  "
+            >
+
               {/* Row 1 */}
               {projects[0] && (
-                <div className="col-span-12 md:col-span-7">
+                <div className="col-span-12 md:col-span-5 md:-mt-12">
                   <ProjectCard {...projects[0]} size="medium" />
                 </div>
               )}
               {projects[1] && (
-                <div className="col-span-12 md:col-span-5 md:pt-20">
+                <div className="col-span-12 md:col-span-6 md:pt-20">
                   <ProjectCard {...projects[1]} size="medium" />
                 </div>
               )}
 
               {/* Row 2 */}
               {projects[2] && (
-                <div className="col-span-12 md:col-span-4 md:-mt-16">
-                  <ProjectCard {...projects[2]} size="small" />
+                <div className="col-span-12 md:col-span-5 md:-mt-16">
+                  <ProjectCard {...projects[2]} size="large" />
                 </div>
               )}
               {projects[3] && (
-                <div className="col-span-12 md:col-span-8">
+                <div className="col-span-12 md:col-span-7 md:pt-16">
                   <ProjectCard {...projects[3]} size="medium" />
                 </div>
               )}
 
               {/* Row 3 */}
               {projects[4] && (
-                <div className="col-span-12 md:col-span-5">
+                <div className="col-span-12 md:col-span-7 md:-mt-2">
                   <ProjectCard {...projects[4]} size="medium" />
                 </div>
               )}
               {projects[5] && (
-                <div className="col-span-12 md:col-span-3 md:pt-16">
-                  <ProjectCard {...projects[5]} size="small" />
+                <div className="col-span-12 md:col-span-5 md:pt-12">
+                  <ProjectCard {...projects[5]} size="large" />
                 </div>
               )}
               {projects[6] && (
@@ -223,7 +235,7 @@ export default async function HomePage() {
               {/* Row 4 */}
               {projects[7] && (
                 <div className="col-span-12 md:col-span-3 md:pt-8">
-                  <ProjectCard {...projects[7]} size="small" />
+                  <ProjectCard {...projects[7]} size="large" />
                 </div>
               )}
               {projects[8] && (
