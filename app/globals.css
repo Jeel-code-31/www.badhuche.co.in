@@ -271,8 +271,16 @@
  .oh-label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   color: #6f6a64;
+  font-family: var(--font-sans);
+}
+
+.oh-lavbel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #dadad5;
   font-family: var(--font-sans);
 }
 
@@ -672,16 +680,16 @@
   -webkit-text-stroke: 3px rgba(0,0,0,0.25);  
 }
  .text-shimmar {
-  color: #ff9b04; 
+  color: #fe9708; 
   background: linear-gradient(
     90deg,
     #060300 25%,
     #000000 45%,
-    #78590e 50%,
-    #b16916 55%,
-    #e7a447 85%
+    #e7a447 50%,
+    #b16916 90%,
+    #e7a447 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
-  animation: shimmer 25s ease-in-out infinite;
+  animation: shimmer 15s ease-in-out infinite;
 }

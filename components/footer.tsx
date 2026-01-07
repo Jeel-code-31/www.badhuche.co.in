@@ -72,32 +72,32 @@ export function Footer({ settings, contactInfo }: FooterProps) {
       {/* Overlay for legibility */}
       <div className="absolute inset-0 bg-gradient-to-t" />
 
-       <div className="relative z-5 px-5 md:px-6 pb-4 pt-7">
+       <div className="relative px-5 md:px-6 pb-4 pt-7">
         <div className="max-w-[1400px] mx-auto">
           {/* The only divider on the entire site */}
           <div className="w-full h-px bg-[rgba(250,247,242,0.16)] mb-3" />
         </div>
 
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between gap-5">
+          <div className="flex flex-col md:flex-row justify-between">
             {/* Left side - branding */}
-            <div className="space-y-9">
+            <div className="space-y-2">
               <MagneticButton href="/">
-                <span className="font-serif text-3xl md:text-4xl font-semibold text-[#FAF7F2] drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)] transition-all duration-300 hover:tracking-[0.08em]">
+                <span className="font-serif text-3xl md:text-4xl font-semibold text-[#FAF7F2] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] transition-all duration-300 hover:tracking-[0.09em]">
                   {siteTitle}
                   <sup className="text-xs align-super ml-0.5">TM</sup>
                 </span>
               </MagneticButton>
-              <p className="text-[#E8E2D9] text-sm max-w-[360px] leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.45)]">
+              <p className="text-[#E8E2D9] text-xl max-w-[360px] leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.45)]">
                 {contactSummary}
               </p>
               <p className="text-[#D9D4CC] text-xs drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">© {new Date().getFullYear()} {siteTitle} Art Studios</p>
             </div>
 
             {/* Right side - contact & social */}
-            <div className="flex flex-col md:flex-row gap-10 md:gap-16">
+            <div className="flex flex-col md:flex-row gap-5 md:gap-20">
               {/* Contact */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <span className="text-xs uppercase tracking-[0.12em] text-[#F5F0E8] font-semibold drop-shadow-[0_3px_12px_rgba(0,0,0,0.45)]">(Contact)</span>
                 <div className="space-y-3">
                   <a

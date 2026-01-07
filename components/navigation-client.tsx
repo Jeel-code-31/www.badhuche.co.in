@@ -94,8 +94,8 @@ export function NavigationClient({ settings, contactInfo }: NavigationClientProp
                   <MagneticButton key={link.href} href={link.href}>
                     <span
                       className={`text-xs uppercase tracking-[0.1em] transition-all duration-300 link-underline ${pathname === link.href
-                          ? "text-[#1A1815] opacity-100"
-                          : "text-[#6B6560] hover:text-[#1A1815] hover:text-white opacity-80"
+                          ? "text-[#2E2B28] opacity-100"
+                          : "text-[#6B6560] hover:text-[#1A1815] hover:text-black opacity-100"
                         }`}
                     >
                       {link.label}
@@ -175,7 +175,7 @@ export function NavigationClient({ settings, contactInfo }: NavigationClientProp
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-[#8B8680] text-xs uppercase tracking-[0.1em]">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-[#8B8680] text-xs uppercase tracking-[0.2em]">
                   <span>{location}</span>
                   <span>{email}</span>
                   <span>{phones}</span>

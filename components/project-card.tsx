@@ -94,8 +94,8 @@ export function ProjectCard({
           rotateX,
           rotateY,
         }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        className="relative h-full w-full overflow-hidden rounded-3xl bg-[#141210]"
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className="relative h-full w-full overflow-hidden rounded-1xl bg-[#141210]"
       >
         {/* ---------- Image ---------- */}
         <div
@@ -111,7 +111,7 @@ export function ProjectCard({
             src={image}
             alt={title}
             fill
-            className={`object-cover transition-all duration-700 ${isHovered ? "scale-110 brightness-110" : "scale-100"
+            className={`object-cover transition-all duration-700 ${isHovered ? "scale-100 brightness-105" : "scale-100"
               }`}
           />
 
@@ -169,10 +169,10 @@ export function ProjectCard({
             : { y: 40, opacity: 0 }
         }
         transition={{ duration: 0.45, ease: "easeOut" }}
-        className="pointer-events-none absolute -bottom-24 left-2 right-2 rounded-3xl
-                   bg-black/40 backdrop-blur-xl p-5 shadow-2xl"
+        className="pointer-events-none md:pointer-events-none absolute -bottom-20 left-2 right-2 rounded-2xl
+                   bg-black/80 backdrop-blur-xl p-12 md:p-6"
       >
-        <span className="text-xl uppercase tracking-[0.2em] text-[#B8963F] block mb-3">
+        <span className="text-xl uppercase tracking-[0.1em] text-[#B8963F] block mb-2">
           ({number})
         </span>
 
@@ -181,11 +181,11 @@ export function ProjectCard({
           text={title}
           mode="hover-wave"
           stagger={0.02}
-          className="font-serif text-3xl text-[#FAF7F2]"
+          className="font-serif text-2xl text-[#FAF7F2]"
         />
 
         {description && (
-          <p className="mt-3 text-sm text-[#E5DED4] leading-relaxed">
+          <p className="mt-3 text-2sm text-[#E5DED4] leading-relaxed">
             {description}
           </p>
         )}

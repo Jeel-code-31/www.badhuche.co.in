@@ -15,8 +15,9 @@ export function WorksGrid({ projects }: WorksGridProps) {
   const canLoadMore = visible < projects.length
 
   return (
-    <div className="space-y-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+    <div className="space-y-9">
+     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-y-12 gap-x-6  sm:gap-y-12 sm:gap-x-10 lg:gap-y-24 lg:gap-x-12">
+
         {items.map((project, index) => (
           <motion.div
             key={project.href}

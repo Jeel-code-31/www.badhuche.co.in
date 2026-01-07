@@ -93,29 +93,29 @@ export default async function HomePage() {
         />
 
         {/* Content Layer */}
-        <div className="h-24 sm:h-36 lg:h-44 mt-30" />
-        <div className="relative z-5 max-w-[1500px] mx-auto w-full">
+        <div className="h-25 sm:h-36 lg:h-44 mt-30 mt-30 sm:mt-45" />
+        <div className="relative z-10 max-w-[1500px] mx-auto w-full">
           <div className="max-w-[1000px]">
 
             {/* Heading text of hero section */}
-            <div className="mt-20 sm:mt-20 md:mt-36 lg:mt-44">
+            <div className="mt-25 sm:mt-45 md:mt-36 lg:mt-44">
               <TextReveal delay={80}>
-                <span className="text-shimmar stroke-text text-4xl md:text-5xl lg:text-6xl">
+                <span className="text-shimmar stroke-text text-3xl md:text-4xl lg:text-5xl">
                   SHAPING'S ICONIC <br /> CULTURAL LANDMARKS
                 </span>
               </TextReveal>
-           
-            <div className="oh-semibold text-sm sm:text-base md:text-4xl max-w-[1200px] mb-5 sm:mb-5 leading-relaxed">
-              <p className="oh-semibold text-4xl md:text-5xl leading-relaxed">
-                <MagneticText
-                  className="mt-2 text-base sm:text-lg text-white/100 max-w-lg block"
-                  activeColor="#da951e"
-                >
-                  {heroSubtitle}
-                </MagneticText>
 
-              </p>
-            </div>
+              <div className="oh-semibold text-xl sm:text-base md:text-4xl max-w-[1200px] mb-5 sm:mb-5 leading-relaxed">
+                <p className="oh-semibold text-5xl md:text-5xl leading-relaxed">
+                  <MagneticText
+                    className="mt-2 text-base sm:text-lg text-white/100 max-w-lg block"
+                    activeColor="#da951e"
+                  >
+                    {heroSubtitle}
+                  </MagneticText>
+
+                </p>
+              </div>
             </div>
 
             {/* Scroll Indicator */}
@@ -177,19 +177,7 @@ export default async function HomePage() {
             </div>
 
             {/* Asymmetric masonry grid - Mobile optimized */}
-            <div
-              className="
-    grid
-    grid-cols-1
-    sm:grid-cols-12
-    md:grid-cols-12
-    gap-x-6
-    gap-y-20
-    sm:gap-y-24
-    md:gap-x-6
-    md:gap-y-28
-  "
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-13 md:grid-cols-12 gap-x-6 gap-y-20 sm:gap-y-24 md:gap-x-6 md:gap-y-28">
 
               {/* Row 1 */}
               {projects[0] && (

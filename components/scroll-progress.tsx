@@ -20,7 +20,7 @@ export function ScrollProgress() {
   return (
     <div className="fixed top-0 left-0 right-0 h-[3px] z-[100] bg-transparent">
       <div
-        className="h-full transition-all duration-100 ease-out"
+        className="h-full transition-all duration-100 ease-out will-change-[width]"
         style={{
           width: `${progress}%`,
           background: "linear-gradient(90deg, #C2542D 0%, #B8963F 100%)",
