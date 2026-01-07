@@ -83,10 +83,7 @@ export default async function WorksPage({ searchParams }: Props) {
         </div>
       </section>
 
-      <section className="relative px-4 sm:px-6 md:px-10 
-  pt-5 sm:pt-5 md:pt-6 
-  pb-20 sm:pb-28 md:pb-32 
-  overflow-hidden">
+      <section className="relative px-4 sm:px-6 md:px-10 pt-5 sm:pt-5 md:pt-6 pb-10 sm:pb-28 md:pb-32 overflow-hidden">
 
         <TextureOverlay texture="canvas" opacity={0.08} blendMode="soft-light" />
         <div className="max-w-[1400px] mx-auto relative z-10">

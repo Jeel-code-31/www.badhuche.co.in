@@ -17,8 +17,7 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
         className="absolute left-[22px] md:left-[30px] top-0 bottom-0 w-[3px] opacity-70"
         style={{
           backgroundImage: "linear-gradient(180deg, #c2542d 0%, #b8963f 50%, #8b6914 100%)",
-          backgroundSize: "200% 200%",
-          animation: "shimmer 12s linear infinite",
+          backgroundSize: "100% 100%",
         }}
       />
       <div className="space-y-14 md:space-y-16 relative z-10">

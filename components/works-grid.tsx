@@ -15,12 +15,12 @@ export function WorksGrid({ projects }: WorksGridProps) {
   const canLoadMore = visible < projects.length
 
   return (
-    <div className="space-y-9">
-     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-y-12 gap-x-6  sm:gap-y-12 sm:gap-x-10 lg:gap-y-24 lg:gap-x-12">
-
+    <div className="space-y-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
         {items.map((project, index) => (
           <motion.div
             key={project.href}
+            className="pb-28 pt-20"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}

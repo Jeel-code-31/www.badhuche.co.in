@@ -28,7 +28,6 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const ref = useRef<HTMLAnchorElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
 
   /* ---------------- Reveal on Scroll ---------------- */
   useEffect(() => {
@@ -48,53 +47,53 @@ export function ProjectCard({
 
   /* ---------------- Sizes ---------------- */
   const sizeClasses = {
-    large: "aspect-[4/5]",
+    large: "aspect-square",
     medium: "aspect-square",
-    small: "aspect-[3/4]",
+    small: "aspect-square",
   }
 
-  /* ---------------- Glow Colors ---------------- */
-  const palette = [
-    "rgba(194,84,45,0.45)",
-    "rgba(184,150,63,0.45)",
-    "rgba(139,105,20,0.45)",
-  ]
-  const glowColor =
-    palette[(Number.parseInt(number, 10) || 0) % palette.length]
-
-  /* ---------------- Tilt Effect ---------------- */
+  /* ---------------- Tilt Effect (Desktop only) ---------------- */
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
   const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10])
   const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10])
 
+  const canHover =
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover)").matches
+    const hoverScale = canHover ? 1.05 : 1
+
   function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (!canHover) return
+
     const rect = e.currentTarget.getBoundingClientRect()
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function resetTilt() {
+    mouseX.set(0)
+    mouseY.set(0)
   }
 
   return (
     <Link
       ref={ref}
       href={href}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false)
-        mouseX.set(0)
-        mouseY.set(0)
-      }}
       onMouseMove={handleMouseMove}
+      onMouseLeave={resetTilt}
       className={`group relative block w-full ${sizeClasses[size]} overflow-visible`}
     >
       {/* ================= CARD ================= */}
       <motion.div
-        style={{
-          rotateX,
-          rotateY,
-        }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        style={
+          canHover
+            ? { rotateX, rotateY }
+            : { rotateX: 0, rotateY: 0 }
+        }
+        whileHover={canHover ? { scale: hoverScale } : undefined}
+        transition={{ type: "spring", stiffness: 50, damping: 25 }}
         className="relative h-full w-full overflow-hidden rounded-1xl bg-[#141210]"
       >
         {/* ---------- Image ---------- */}
@@ -111,86 +110,47 @@ export function ProjectCard({
             src={image}
             alt={title}
             fill
-            className={`object-cover transition-all duration-700 ${isHovered ? "scale-100 brightness-105" : "scale-100"
-              }`}
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
 
           <TextureOverlay
             texture="stone"
-            opacity={isHovered ? 0.18 : 0.08}
+            opacity={0.12}
             blendMode="multiply"
           />
         </div>
-
-        {/* ---------- Big Number ---------- */}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ delay: 0.4 + revealDelay / 1000 }}
-          className="absolute top-6 left-6 font-mono text-7xl font-light select-none"
-          style={{
-            backgroundImage: "linear-gradient(135deg, #ffe02eff 0%, #c8a44fff 50%, #F6C1A1 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          {number}
-        </motion.span>
       </motion.div>
-      {/* Arrow Icon */}
-      <div
-        className={`absolute top-4 right-4 transition-all duration-500 ${isHovered
-            ? "translate-x-0 translate-y-0 opacity-100"
-            : "translate-x-2 -translate-y-2 opacity-0"
-          }`}
-      >
-        <svg
-          width="40"
-          height="70"
-          viewBox="0 0 20 20"
-          fill="none"
-          className="text-[#FAF7F2]"
-        >
-          <path
-            d="M5 15L15 5M15 5H7M15 5V13"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-        </svg>
-      </div>
-
-
-      {/* ================= POPUP CONTENT ================= */}
+      {/* ================= STABLE CONTENT ================= */}
       <motion.div
-        initial={{ y: 40, opacity: 0 }}
-        animate={
-          isHovered
-            ? { y: 0, opacity: 1 }
-            : { y: 40, opacity: 0 }
-        }
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="pointer-events-none md:pointer-events-none absolute -bottom-20 left-2 right-2 rounded-2xl
-                   bg-black/80 backdrop-blur-xl p-12 md:p-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{
+          opacity: isVisible ? 1 : 0,
+          y: isVisible ? 0 : 20,
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+          delay: 0.3,
+        }}
+        className="absolute -bottom-23 left-0 right-0 rounded-2xl p-6"
       >
-        <span className="text-xl uppercase tracking-[0.1em] text-[#B8963F] block mb-2">
+        <span className="text-2xl font-bold uppercase tracking-[0.1em] text-[#B8963F] block mb-2">
           ({number})
         </span>
 
         <SplitText
           as="h3"
           text={title}
-          mode="hover-wave"
           stagger={0.02}
-          className="font-serif text-2xl text-[#FAF7F2]"
+          className="font-serif text-3xl text-[#000000]"
         />
 
         {description && (
-          <p className="mt-3 text-2sm text-[#E5DED4] leading-relaxed">
+          <p className="mt-3 text-2sm text-[#000000] leading-relaxed">
             {description}
           </p>
         )}
       </motion.div>
     </Link>
-
   )
 }

@@ -181,94 +181,94 @@ export default async function HomePage() {
 
               {/* Row 1 */}
               {projects[0] && (
-                <div className="col-span-12 md:col-span-5 md:-mt-12">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[0]} size="medium" />
                 </div>
               )}
               {projects[1] && (
-                <div className="col-span-12 md:col-span-6 md:pt-20">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[1]} size="medium" />
                 </div>
               )}
 
               {/* Row 2 */}
               {projects[2] && (
-                <div className="col-span-12 md:col-span-5 md:-mt-16">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[2]} size="large" />
                 </div>
               )}
               {projects[3] && (
-                <div className="col-span-12 md:col-span-7 md:pt-16">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[3]} size="medium" />
                 </div>
               )}
 
               {/* Row 3 */}
               {projects[4] && (
-                <div className="col-span-12 md:col-span-7 md:-mt-2">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[4]} size="medium" />
                 </div>
               )}
               {projects[5] && (
-                <div className="col-span-12 md:col-span-5 md:pt-12">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[5]} size="large" />
                 </div>
               )}
               {projects[6] && (
-                <div className="col-span-12 md:col-span-4 md:-mt-12">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[6]} size="large" />
                 </div>
               )}
 
               {/* Row 4 */}
               {projects[7] && (
-                <div className="col-span-12 md:col-span-3 md:pt-8">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[7]} size="large" />
                 </div>
               )}
               {projects[8] && (
-                <div className="col-span-12 md:col-span-6">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[8]} size="large" />
                 </div>
               )}
               {projects[9] && (
-                <div className="col-span-12 md:col-span-3 md:pt-24">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[9]} size="small" />
                 </div>
               )}
 
               {/* Row 5 */}
               {projects[10] && (
-                <div className="col-span-12 md:col-span-6 md:-mt-20">
+                <div className="col-span-12 md:col-span-6 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[10]} size="medium" />
                 </div>
               )}
               {projects[11] && (
-                <div className="col-span-12 md:col-span-6 md:pt-12">
+                <div className="col-span-12 md:col-span-6 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[11]} size="medium" />
                 </div>
               )}
 
               {/* Row 6 */}
               {projects[12] && (
-                <div className="col-span-12 md:col-span-8 md:-mt-8">
+                <div className="col-span-12 md:col-span-8 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[12]} size="large" />
                 </div>
               )}
               {projects[13] && (
-                <div className="col-span-12 md:col-span-4 md:pt-16">
+                <div className="col-span-12 md:col-span-4 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[13]} size="small" />
                 </div>
               )}
 
               {/* Row 7 */}
               {projects[14] && (
-                <div className="col-span-12 md:col-span-5">
+                <div className="col-span-12 md:col-span-5 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[14]} size="medium" />
                 </div>
               )}
               {projects[15] && (
-                <div className="col-span-12 md:col-span-7 md:-mt-16">
+                <div className="col-span-12 md:col-span-7 md:pt-20 mt-20 md:mt-0">
                   <ProjectCard {...projects[15]} size="large" />
                 </div>
               )}
@@ -278,7 +278,7 @@ export default async function HomePage() {
       )}
 
       {/* Marquee */}
-      <section className="pt-10 pb-30 overflow-hidden">
+      <section className="pt-20 md:pt-25">
         <Marquee />
       </section>
 
